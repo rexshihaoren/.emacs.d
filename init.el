@@ -23,7 +23,6 @@ el-get-install-skip-emacswiki-recipes)
   '(el-get
     ensime
     hive
-    org-mode
     auto-complete
     sql-indent
     evil
