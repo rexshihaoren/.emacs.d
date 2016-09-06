@@ -45,6 +45,10 @@ el-get-install-skip-emacswiki-recipes)
     rainbow-delimiters
     exec-path-from-shell)
     ))
+(el-get-bundle ensime
+  :type github
+  :pkgname "ensime/ensime-emacs"
+  :branch "1.0")
 ;; add recipes
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 ;; install new packages and init already installed packages
