@@ -30,6 +30,7 @@ el-get-install-skip-emacswiki-recipes)
     ;;evil-tutor
     elpy
     pig-mode
+    neotree
     helm
     powerline
     helm-projectile
@@ -100,6 +101,9 @@ el-get-install-skip-emacswiki-recipes)
 (global-visual-line-mode 1)
 
 ;; Package Setting
+;; neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 ;; evil
 (evil-mode 1)
 (evil-escape-mode 1)
@@ -112,9 +116,9 @@ el-get-install-skip-emacswiki-recipes)
 ;; which key
 (which-key-mode)
 ;; fill column indicator
-(setq fci-rule-width 1)
-(setq-default fci-rule-column 72)
-(add-hook 'after-change-major-mode-hook 'fci-mode)
+;; (setq fci-rule-width 1)
+;; (setq-default fci-rule-column 72)
+;; (add-hook 'after-change-major-mode-hook 'fci-mode)
 ;; .hql use sql-mode
 (setq auto-mode-alist (cons '("\\.hql$" . sql-mode) auto-mode-alist))
 ;; helm
