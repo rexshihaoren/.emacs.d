@@ -21,8 +21,14 @@ el-get-install-skip-emacswiki-recipes)
  rex-packages
  (append
   '(el-get
+    py-yapf
     ensime
     hive
+    yaml-mode
+    js2-mode
+    jinja2-mode
+    web-mode
+    skewer-mode
     auto-complete
     sql-indent
     evil
@@ -44,7 +50,11 @@ el-get-install-skip-emacswiki-recipes)
     ace-window
     material-theme
     rainbow-delimiters
-    exec-path-from-shell)
+    exec-path-from-shell
+    ;; docker
+    dockerfile-mode
+    eclim
+    )
     ))
 (el-get-bundle ensime
   :type github
@@ -99,8 +109,14 @@ el-get-install-skip-emacswiki-recipes)
 (global-set-key (kbd "M-m") 'fullscreen)
 ;; auto fill
 (global-visual-line-mode 1)
+;; refresh file whenever the file changes on disk
+(global-auto-revert-mode t)
 
 ;; Package Setting
+;; skewer mode
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'html-mode-hook 'skewer-html-mode)
 ;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
@@ -110,6 +126,7 @@ el-get-install-skip-emacswiki-recipes)
 (setq-default evil-escape-key-sequence "jk")
 ;; python
 (elpy-enable)
+(setq elpy-rpc-timeout nil)
 ;; ace-window
 (global-set-key (kbd "M-p") 'ace-window)
 (setq aw-dispatch-always t)
@@ -121,6 +138,8 @@ el-get-install-skip-emacswiki-recipes)
 ;; (add-hook 'after-change-major-mode-hook 'fci-mode)
 ;; .hql use sql-mode
 (setq auto-mode-alist (cons '("\\.hql$" . sql-mode) auto-mode-alist))
+;; docker
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
 ;; helm
 (helm-mode 1)
 (setq helm-display-header-line nil
@@ -143,6 +162,7 @@ helm-ff-file-name-history-use-recentf t)
 (setq projectile-switch-project-action 'projectile-dired)
 (require 'helm-projectile)
 (helm-projectile-on)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 ;; smart paren
 (show-smartparens-mode +1)
 ;; TRAMP
@@ -161,7 +181,22 @@ helm-ff-file-name-history-use-recentf t)
 (setq pig-version "0.15.0")
 ;; Scala
 (require 'ensime)
+;; eclim
+(require 'eclim)
+(add-hook 'java-mode-hook 'eclim-mode)
 
 ;;; Customization
 (eval-after-load "sql"
   '(load-library "sql-indent"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (sql-indent py-yapf pig-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
